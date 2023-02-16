@@ -1,0 +1,148 @@
+### ZSH vars
+# write history to file
+setopt INC_APPEND_HISTORY SHARE_HISTORY
+setopt MENUCOMPLETE
+HISTFILE=~/.zsh_history
+
+autoload -Uz compinit
+compinit
+
+source ~/.profile
+
+### Functions
+
+function up {
+    if [[ "$#" < 1 ]] ; then
+        cd ..
+    else
+        CDSTR=""
+        for i in {1..$1} ; do
+            CDSTR="../$CDSTR"
+        done
+        cd $CDSTR
+    fi
+}
+
+
+function pullmaster {
+    CURRENT_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+    if [ -z "$CURRENT_BRANCH_NAME" ] ; then
+        echo "Couldn't determine current branch. Is this directory under git?"
+        return 1;
+    else
+        git checkout master && git pull && git checkout $CURRENT_BRANCH_NAME
+    fi
+}
+
+function whichhost {
+    if [ -z "$1" ]; then
+        echo "Usage: whichhost HOSTNAME_SUBSTRING";
+    else
+        grep -A3 "Host $1" ~/.ssh/config 
+    fi
+}
+
+function bgdo {
+    if [ -z "$1" ]; then
+        echo "Usage bgdo COMMAND"
+        exit 1;
+    else
+        $1 &;
+        disown
+    fi
+}
+
+function weather {
+    curl "wttr.in/${1:-30189}"
+}
+
+### Aliases
+alias ls='ls --color=auto'
+alias :q=exit
+alias serve="python -mSimpleHTTPServer"
+alias ismythup="sudo service mythtv-backend status"
+
+
+### Keybinds
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
+
+bindkey -v
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+### Misc Completion
+
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*' force-list select
+
+ssh () {
+    if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
+        tmux rename-window "$*"
+        command ssh "$@"
+        tmux set-window-option automatic-rename "on" 1>/dev/null
+    else
+        command ssh "$@"
+    fi
+}
+
+# OPAM configuration -- commented out because it's very slow
+#. /home/spencer/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Nim
+# if [ -d "$HOME/apps/Nim/bin" ] ; then
+#     export PATH="$HOME/apps/Nim/bin:$PATH"
+# fi
+# if [ -d "$HOME/.nimble/bin" ] ; then
+#     export PATH="$HOME/.nimble/bin:$PATH"
+# fi
+
+function _fzf_comprun() {
+	local command=$1
+	shift
+
+	case "$command" in
+		cd)				fzf "$@" --preview 'tree -C {} | head -200' ;;
+		export|unset)	fzf "$@" --preview "eval 'echo \$'{}" ;;
+		vim|nvim)		fzf "$@" --preview 'bat --color=always {}' ;;
+		*)				fzf "$@" ;;
+	esac
+}
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+#Yarn global binaries
+[ -x "$(command -v yarn)" ] && export PATH="$PATH:`yarn global bin`"
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+alias bat="batcat"
+alias fd="fdfind"
+
+PATH="/home/spencer/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/spencer/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/spencer/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/spencer/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/spencer/perl5"; export PERL_MM_OPT;
+
+_direnv_hook() {
+  trap -- '' SIGINT;
+  eval "$("/usr/bin/direnv" export zsh)";
+  trap - SIGINT;
+}
+typeset -ag precmd_functions;
+if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
+  precmd_functions=( _direnv_hook ${precmd_functions[@]} )
+fi
+typeset -ag chpwd_functions;
+if [[ -z ${chpwd_functions[(r)_direnv_hook]} ]]; then
+  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+fi
+
+eval "$(starship init zsh)"
