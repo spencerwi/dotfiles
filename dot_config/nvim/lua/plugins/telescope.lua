@@ -24,20 +24,25 @@ return {
 			local keymap_opts = {noremap=true, silent=true}
 			command_center.add({
 				{
-						description = 'Find files',
-						cmd = '<CMD>Telescope find_files<CR>',
-						keybindings = {'n', '<C-t>', keymap_opts}
+					description = 'Find files',
+					cmd = '<CMD>Telescope find_files<CR>',
+					keybindings = {'n', '<C-t>', keymap_opts}
 				},
 				{
-						description = 'Switch buffers',
-						cmd = '<CMD>Telescope buffers<CR>',
-						keybindings = {'n', '<leader>b', keymap_opts}
+					description = 'Switch buffers',
+					cmd = '<CMD>Telescope buffers<CR>',
+					keybindings = {'n', '<leader>b', keymap_opts}
 				},
 				{
-						description = 'Grep in files',
-						cmd = '<CMD>Telescope live_grep<CR>',
-						keybindings = {'n', '<leader>f', keymap_opts}
+					description = 'Grep in files',
+					cmd = '<CMD>Telescope live_grep<CR>',
+					keybindings = {'n', '<leader>f', keymap_opts}
 				},
+				{
+					description = 'Recent locations',
+					cmd = '<CMD>Telescope jumplist<CR>',
+					keybindings = {'n', 'gj', keymap_opts}
+				}
 			})
 		end
 	},
