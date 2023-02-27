@@ -1,0 +1,40 @@
+let mapleader = ","
+
+" Navigation stuff -------------------------------------
+map <C-t> <Action>(GotoFile)
+map <C-n> <Action>(GotoClass)
+map <leader>b <Action>(RecentFiles)
+map gs <Action>(GotoSymbol)
+map go <Action>(FileStructurePopup)
+map gj <Action>(RecentLocations)
+
+" Insight on a specific symbol under the cursor --------
+map gd <Action>(GotoDeclaration)
+map gD <Action>(GotoDefinition)
+map gi <Action>(GotoImplementation)
+map gr <Action>(ShowUsages)
+
+" Modifying the symbol under the cursor
+map <leader>rn <Action>(RenameElement)
+map <leader>rr <Action>(RefactoringMenu)
+
+" Other Utils -----------------------------------------
+" run whatever test is closest to the text cursor
+map <leader>t <Action>(ContextRun)
+" same thing, but debugging
+map <leader>dt <Action>(ContextDebug)
+" Toggle a breakpoint on the current line
+map <leader>db <Action>(ToggleLineBreakpoint)
+" Actions type-to-search
+map <leader>a <Action>(GotoAction)
+" Hide all tool windows
+map <A-\> <Action>(HideAllWindows)
+
+" Fix Ideavim's broken jumplist
+map <C-i> <Action>(Forward)
+map <C-o> <Action>(Back)
+
+set ideamarks
+set ideajoin
+
+Plug 'tpope/vim-surround'
