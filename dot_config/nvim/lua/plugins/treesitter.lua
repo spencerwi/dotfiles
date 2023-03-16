@@ -62,8 +62,28 @@ return {
 					"yaml",
 					"zig",
 				},
-				highlight = { enable = true },
-				indent = { enable = true }
+				highlight = { 
+					enable = true,
+					-- Disable on really big files, because tree-sitter is both slow and synchronous
+					disable = function(lang, buf) 
+						local max_filesize = 4 * 1024 * 1024 -- 4 MB
+						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+						if ok and stats and stats.size > max_filesize then
+							return true
+						end
+					end
+				},
+				indent = { 
+					enable = true,
+					-- Disable on really big files, because tree-sitter is both slow and synchronous
+					disable = function(lang, buf) 
+						local max_filesize = 4 * 1024 * 1024 -- 4 MB
+						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+						if ok and stats and stats.size > max_filesize then
+							return true
+						end
+					end
+				},
 			}
 
 			-- require("nvim-treesitter.configs").setup {
