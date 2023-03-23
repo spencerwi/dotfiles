@@ -60,7 +60,7 @@ function weather {
 alias ls='ls --color=auto'
 alias :q=exit
 alias serve="python -mSimpleHTTPServer"
-alias ismythup="sudo service mythtv-backend status"
+alias cz="chezmoi"
 
 
 ### Keybinds
