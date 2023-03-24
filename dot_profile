@@ -8,7 +8,15 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/snapd/desktop/:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
+
+# XDG configuration stuff, via xdg-ninja
+export ANDROID_HOME="$XDG_DATA_HOME/android"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -38,8 +46,8 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Cargo (rust)
-if [ -d "$HOME/.cargo/bin" ] ; then
-    PATH="$HOME/.cargo/bin:$PATH"
+if [ -d "$CARGO_HOME/bin" ] ; then
+    PATH="$CARGO_HOME/bin:$PATH"
 fi
 
 # Swift 
@@ -71,7 +79,7 @@ fi
 export EDITOR="vim"
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 
-. "$HOME/.cargo/env"
+. "$CARGO_HOME/env"
 
 if [ -d "$HOME/apps/jdt-language-server/" ] ; then
 	export JDTLS_HOME="$HOME/apps/jdt-language-server"
@@ -94,3 +102,4 @@ fi
 if [ -d "$HOME/.nimble/bin" ] ; then
 	PATH="$HOME/.nimble/bin:$PATH:"
 fi
+
