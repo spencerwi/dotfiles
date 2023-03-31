@@ -65,11 +65,6 @@ if [ -d "$HOME/apps/scry/bin/linux" ] ; then
     PATH="$HOME/apps/scry/bin/linux:$PATH"
 fi
 
-# Snap
-if [ -d "/snap/bin" ] ; then
-    PATH="/snap/bin:$PATH"
-fi
-
 # Dotnet tools
 
 if [ -d "$HOME/.dotnet/tools" ] ; then
@@ -100,6 +95,10 @@ if [ -f "$HOME/.config/lynx.lss" ] ; then
 fi
 
 if [ -d "$HOME/.nimble/bin" ] ; then
-	PATH="$HOME/.nimble/bin:$PATH:"
+	PATH="$HOME/.nimble/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/share/ponyup/bin" ] ; then
+	PATH="$HOME/.local/share/ponyup/bin:$PATH"
 fi
 

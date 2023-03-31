@@ -121,5 +121,6 @@ require('lazy').setup({
 	-- Similarly, nim needs a plugin
 	'zah/nim.vim',
 
-	-- LSP stuff
+	-- And one for pony-lang too
+	'dleonard0/pony-vim-syntax',
 })
