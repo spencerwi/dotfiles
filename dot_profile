@@ -68,10 +68,14 @@ fi
 # Dotnet tools
 
 if [ -d "$HOME/.dotnet/tools" ] ; then
-	PATH="$HOME/.dotnet/tools:$PATH"
+    PATH="$HOME/.dotnet/tools:$PATH"
 fi
 
 export EDITOR="vim"
+if command -v nvim &>/dev/null ; then
+    export EDITOR="nvim"
+fi
+
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 
 . "$CARGO_HOME/env"
