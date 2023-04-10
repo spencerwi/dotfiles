@@ -123,9 +123,6 @@ export NVM_DIR="$HOME/.nvm"
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-alias bat="batcat"
-alias fd="fdfind"
-
 PATH="/home/spencer/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/spencer/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/spencer/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
