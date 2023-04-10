@@ -70,7 +70,6 @@ require('lazy').setup({
 	-- Utilities
 	'tpope/vim-rhubarb',
 	'benekastah/neomake',
-	'editorconfig/editorconfig-vim',
 	'tpope/vim-commentary',
 	'tpope/vim-surround',
 	
