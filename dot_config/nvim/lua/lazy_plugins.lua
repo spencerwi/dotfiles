@@ -122,4 +122,7 @@ require('lazy').setup({
 
 	-- And one for pony-lang too
 	'dleonard0/pony-vim-syntax',
+
+	-- And for Gleam (an ML-like on the erlang BEAM vm)
+	'gleam-lang/gleam.vim',
 })

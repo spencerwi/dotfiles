@@ -182,6 +182,9 @@ return {
 			-- Nim has nimlsp
 			add_lsp('nimls')
 
+			-- Gleam has its own LSP
+			add_lsp('gleam')
+
 			-- Emmet for use with HTML
 			register_new_lsp('ls_emmet', {
 				default_config = {
