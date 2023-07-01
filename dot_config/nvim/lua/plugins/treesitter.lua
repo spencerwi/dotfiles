@@ -118,15 +118,15 @@ return {
 	},
 
 	-- Show current Treesitter context (like breadcrumbs) if available
-	{
-		'nvim-treesitter/nvim-treesitter-context',
-		dependencies = { 
-			{"nvim-treesitter/nvim-treesitter"}
-		},
-		config = function()
-			require('treesitter-context').setup({})
-		end
-	},
+	-- {
+	-- 	'nvim-treesitter/nvim-treesitter-context',
+	-- 	dependencies = { 
+	-- 		{"nvim-treesitter/nvim-treesitter"}
+	-- 	},
+	-- 	config = function()
+	-- 		require('treesitter-context').setup({})
+	-- 	end
+	-- },
 
 	-- treesitter-powered refactoring
 	{
