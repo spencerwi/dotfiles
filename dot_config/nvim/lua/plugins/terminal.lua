@@ -1,13 +1,13 @@
 return {
 	"numToStr/FTerm.nvim",
-	dependencies = {'gfeiyou/command_center.nvim'},
+	dependencies = {'FeiyouG/commander.nvim'},
 	config = function()
-		local command_center = require('command_center')
-		command_center.add({
+		local commander = require('commander')
+		commander.add({
 			{
-				description = 'Toggle floating terminal',
+				desc = 'Toggle floating terminal',
 				cmd = '<cmd>lua require("FTerm").toggle()<CR>',
-				keybindings = {'n', 'gt', {noremap=true, silent=true}}
+				keys = {'n', 'gt', {noremap=true, silent=true}}
 			}
 		})
 	end

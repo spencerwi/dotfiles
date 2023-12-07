@@ -20,10 +20,10 @@ require('lazy').setup({
 	-- Git stuff
 	{
 		'tpope/vim-fugitive',
-		dependencies = {'gfeiyou/command-center.nvim'},
+		dependencies = {'FeiyouG/commander.nvim'},
 		init = function()
-			local command_center = require('command_center')
-			command_center.add({
+			local commander = require('commander')
+			commander.add({
 				{
 						description = 'Git blame/annotate',
 						cmd = '<CMD>Git blame<CR>'
@@ -48,7 +48,7 @@ require('lazy').setup({
 						description = 'Git push',
 						cmd = '<CMD>Git push<CR>'
 				},
-			}, command_center.mode.ADD_ONLY)
+			})
 		end
 	},
 	-- { -- nice git signs in the gutter
@@ -75,10 +75,10 @@ require('lazy').setup({
 	
 	{
 		"klen/nvim-test",
-		dependencies = {'gfeiyou/command-center.nvim'},
+		dependencies = {'FeiyouG/commander.nvim'},
 		config = function()
-			local command_center = require('command_center')
-			command_center.add({
+			local commander = require('commander')
+			commander.add({
 				{
 					description = 'Test nearest',
 					cmd = '<CMD>TestNearest<CR>',

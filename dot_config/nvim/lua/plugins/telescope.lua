@@ -14,34 +14,41 @@ return {
 
 	-- Nice command palette
 	{
-		"gfeiyou/command-center.nvim",
+		"FeiyouG/commander.nvim",
 		lazy = false,
 		dependencies = { "nvim-telescope/telescope.nvim" },
 		config = function() 
-			require('telescope').load_extension('command_center')
-			local command_center = require('command_center')
-			vim.keymap.set('n', '<leader>a', '<cmd>Telescope command_center<CR>')
+			local commander = require('commander')
+			require('telescope').load_extension('commander')
+			commander.setup({
+				integration = {
+					telescope = {
+						enabled = true
+					}
+				}
+			})
+			vim.keymap.set('n', '<leader>a', '<cmd>Telescope commander<CR>')
 			local keymap_opts = {noremap=true, silent=true}
-			command_center.add({
+			commander.add({
 				{
-					description = 'Find files',
+					desc = 'Find files',
 					cmd = '<CMD>Telescope find_files<CR>',
-					keybindings = {'n', '<C-t>', keymap_opts}
+					keys = {'n', '<C-t>', keymap_opts}
 				},
 				{
-					description = 'Switch buffers',
+					desc = 'Switch buffers',
 					cmd = '<CMD>Telescope buffers<CR>',
-					keybindings = {'n', '<leader>b', keymap_opts}
+					keys = {'n', '<leader>b', keymap_opts}
 				},
 				{
-					description = 'Grep in files',
+					desc = 'Grep in files',
 					cmd = '<CMD>Telescope live_grep<CR>',
-					keybindings = {'n', '<leader>f', keymap_opts}
+					keys = {'n', '<leader>f', keymap_opts}
 				},
 				{
-					description = 'Recent locations',
+					desc = 'Recent locations',
 					cmd = '<CMD>Telescope jumplist<CR>',
-					keybindings = {'n', 'gj', keymap_opts}
+					keys = {'n', 'gj', keymap_opts}
 				}
 			})
 		end

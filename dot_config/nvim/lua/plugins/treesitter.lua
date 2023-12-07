@@ -92,7 +92,7 @@ return {
 			-- 		disable = {},
 			-- 		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
 			-- 		persist_queries = false, -- Whether the query persists across vim sessions
-			-- 		keybindings = {
+			-- 		keys = {
 			-- 			toggle_query_editor = 'o',
 			-- 			toggle_hl_groups = 'i',
 			-- 			toggle_injected_languages = 't',
@@ -106,12 +106,12 @@ return {
 			-- 		},
 			-- 	}
 			-- }
-			local command_center = require('command_center')
-			command_center.add({
+			local commander = require('commander')
+			commander.add({
 				{
-						description = "Navigate outline",
+						desc = "Navigate outline",
 						cmd = "<CMD>Telescope treesitter<CR>",
-						keybindings = {'n', 'gO', {noremap=true, silent=true} }
+						keys = {'n', 'gO', {noremap=true, silent=true} }
 				}
 			})
 		end
@@ -134,18 +134,18 @@ return {
 		dependencies = {
 			{"nvim-lua/plenary.nvim"},
 			{"nvim-treesitter/nvim-treesitter"},
-			{'gfeiyou/command-center.nvim'},
+			{'FeiyouG/commander.nvim'},
 		},
 		config = function()
 			require('refactoring').setup({})
-			-- It's safe to assume there's telescope, since there's command-center.nvim
+			-- It's safe to assume there's telescope, since there's commander.nvim
 			require('telescope').load_extension('refactoring')
-			local command_center = require('command_center')
-			command_center.add({
+			local commander = require('commander')
+			commander.add({
 				{
-					description = "Refactor selection...",
+					desc = "Refactor selection...",
 					cmd = "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
-					keybindings = {'v', '<leader>rr', {noremap=true, silent=true}}
+					keys = {'v', '<leader>rr', {noremap=true, silent=true}}
 				}
 			})
 		end

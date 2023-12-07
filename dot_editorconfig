@@ -10,6 +10,6 @@ tab_width = 4
 indent_style = space
 indent_size = 2
 
-[*.py, *.fs, *.fsx, *.fsi]
+[*.{py,fs,fsx,fsi}]
 indent_style = space
 indent_size = 4

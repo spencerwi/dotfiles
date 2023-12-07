@@ -1,7 +1,7 @@
 return {
 	{
 		'mfussenegger/nvim-dap',
-		dependencies = {'gfeiyou/command-center.nvim'},
+		dependencies = {'FeiyouG/commander.nvim'},
 		init = function() 
 			local dap = require('dap')
 
@@ -47,57 +47,57 @@ return {
 			vim.fn.sign_define('DapStopped', {text='➤', texthl='', linehl='', numhl=''})
 
 			local keymap_opts = {noremap = true, silent = true}
-			local command_center = require('command_center')
-			command_center.add({
+			local commander = require('commander')
+			commander.add({
 				{
-					description = '(Debug) Run',
+					desc = '(Debug) Run',
 					cmd = function() 
 						dap.continue()
 						dap.repl.open()
 					end,
-					keybindings = {'n', '<leader>dr', keymap_opts}
+					keys = {'n', '<leader>dr', keymap_opts}
 				},
 				{
-					description = '(Debug) Stop debugging',
+					desc = '(Debug) Stop debugging',
 					cmd = dap.terminate,
-					keybindings = {'n', '<leader>dn', keymap_opts}
+					keys = {'n', '<leader>dn', keymap_opts}
 				},
 				{
-					description = '(Debug) Up in stack',
+					desc = '(Debug) Up in stack',
 					cmd = dap.up,
-					keybindings = {'n', '<leader>du', keymap_opts}
+					keys = {'n', '<leader>du', keymap_opts}
 				},
 				{
-					description = '(Debug) Down in stack',
+					desc = '(Debug) Down in stack',
 					cmd = dap.down,
-					keybindings = {'n', '<leader>dd', keymap_opts}
+					keys = {'n', '<leader>dd', keymap_opts}
 				},
 				{
-					description = '(Debug) Step Over',
+					desc = '(Debug) Step Over',
 					cmd = dap.step_over,
-					keybindings = {'n', '<leader>dn', keymap_opts}
+					keys = {'n', '<leader>dn', keymap_opts}
 				},
 				{
-					description = '(Debug) Step Into',
+					desc = '(Debug) Step Into',
 					cmd = dap.step_into,
-					keybindings = {'n', '<leader>di', keymap_opts}
+					keys = {'n', '<leader>di', keymap_opts}
 				},
 				{
-					description = '(Debug) Toggle Breakpoint',
+					desc = '(Debug) Toggle Breakpoint',
 					cmd = dap.toggle_breakpoint,
-					keybindings = {'n', '<leader>db', keymap_opts}
+					keys = {'n', '<leader>db', keymap_opts}
 				},
 				{
-					description = '(Debug) Conditional Breakpoint',
+					desc = '(Debug) Conditional Breakpoint',
 					cmd = function()
 						dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
 					end,
-					keybindings = {'n', '<leader>dcb', keymap_opts}
+					keys = {'n', '<leader>dcb', keymap_opts}
 				},
 				{
-					description = '(Debug) Open REPL',
+					desc = '(Debug) Open REPL',
 					cmd = dap.repl.open,
-					keybindings = {'n', '<leader>de', keymap_opts}
+					keys = {'n', '<leader>de', keymap_opts}
 				}
 			})
 		end

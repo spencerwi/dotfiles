@@ -112,8 +112,7 @@ function _fzf_comprun() {
 		*)				fzf "$@" ;;
 	esac
 }
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
+[ -f /usr/share/fzf/shell/key-bindings.zsh ] && source /usr/share/fzf/shell/key-bindings.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -144,3 +143,6 @@ if [[ -z ${chpwd_functions[(r)_direnv_hook]} ]]; then
 fi
 
 eval "$(starship init zsh)"
+
+# opam configuration
+[[ ! -r /home/spencerwi/.opam/opam-init/init.zsh ]] || source /home/spencerwi/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

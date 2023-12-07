@@ -84,9 +84,7 @@ if [ -d "$HOME/apps/jdt-language-server/" ] ; then
 	export JDTLS_HOME="$HOME/apps/jdt-language-server"
 fi
 
-if [ -d "/snap/dotnet-sdk/current" ] ; then
-	export DOTNET_ROOT="/snap/dotnet-sdk/current"
-fi
+unset DOTNET_ROOT
 
 if [ -d "/opt/apache-maven/current" ] ; then
 	export MAVEN_HOME="/opt/apache-maven/current";

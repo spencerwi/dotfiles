@@ -20,86 +20,86 @@ return {
 
 				-- Mappings.
 				local opts = { noremap=true, silent=true }
-				local command_center = require('command_center')
-				command_center.add({
+				local commander = require('commander')
+				commander.add({
 				-- See `:help vim.lsp.*` for documentation on any of the below functions
 					{
-							description = '(LSP) Go to Declaration',
+							desc = '(LSP) Go to Declaration',
 							cmd = vim.lsp.buf.declaration,
-							keybindings = {'n', 'gD', opts}
+							keys = {'n', 'gD', opts}
 					},
 					{
-							description = '(LSP) Go to Definition',
+							desc = '(LSP) Go to Definition',
 							cmd = vim.lsp.buf.definition,
-							keybindings = {
+							keys = {
 								{'n', 'gd', opts},
 								{'n', '<C-]>', opts},
 							}
 					},
 					{
-							description = '(LSP) Go to Implementation',
+							desc = '(LSP) Go to Implementation',
 							cmd = vim.lsp.buf.implementation,
-							keybindings = {'n', 'gi', opts}
+							keys = {'n', 'gi', opts}
 					},
 					{
-							description = '(LSP) Show hover documentation',
+							desc = '(LSP) Show hover documentation',
 							cmd = vim.lsp.buf.hover,
-							keybindings = {
+							keys = {
 								{'n', 'K', opts},
 								{'v', 'K', opts},
 							}
 					},
 					{
-							description = '(LSP) Show signature help',
+							desc = '(LSP) Show signature help',
 							cmd = vim.lsp.buf.hover,
-							keybindings = {'n', '<C-k>', opts}
+							keys = {'n', '<C-k>', opts}
 					},
 					{
-							description = '(LSP) Show type definition',
+							desc = '(LSP) Show type definition',
 							cmd = vim.lsp.buf.type_definition,
-							keybindings = {'n', '<leader>K', opts}
+							keys = {'n', '<leader>K', opts}
 					},
 					{
-							description = '(LSP) Previous error',
+							desc = '(LSP) Previous error',
 							cmd = vim.diagnostic.goto_prev,
-							keybindings = {'n', '[d', opts}
+							keys = {'n', '[d', opts}
 					},
 					{
-							description = '(LSP) Next error',
+							desc = '(LSP) Next error',
 							cmd = vim.diagnostic.goto_next,
-							keybindings = {'n', ']d', opts}
+							keys = {'n', ']d', opts}
 					},
 					{
-							description = '(LSP) Rename',
+							desc = '(LSP) Rename',
 							cmd = vim.lsp.buf.rename,
-							keybindings = {'n', '<leader>rn', opts}
+							keys = {'n', '<leader>rn', opts}
 					},
 					{
-							description = '(LSP) Code action',
+							desc = '(LSP) Code action',
 							cmd = vim.lsp.buf.code_action,
-							keybindings = {'n', '<leader>ca', opts}
+							keys = {'n', '<leader>ca', opts}
 					},
 					{
-							description = '(LSP) Code action on selection',
+							desc = '(LSP) Code action on selection',
 							cmd = function() vim.lsp.buf.range_code_action() end,
-							keybindings = {'v', '<leader>ca', opts}
+							keys = {'v', '<leader>ca', opts}
 					},
 
 					-- These use Telescope
 					{
-							description = '(LSP) Go to symbol in workspace',
+							desc = '(LSP) Go to symbol in workspace',
 							cmd = '<CMD>Telescope lsp_dynamic_workspace_symbols<CR>',
-							keybindings = {'n', 'gs', opts}
+							keys = {'n', 'gs', opts}
 					},
 					{
-							description = '(LSP) Go to symbol in document',
+							desc = '(LSP) Go to symbol in document',
 							cmd = '<CMD>Telescope lsp_document_symbols<CR>',
-							keybindings = {'n', 'go', opts}
+							keys = {'n', 'go', opts}
 					},
 					{
-							description = '(LSP) Go to references',
+							desc = '(LSP) Go to references',
 							cmd = '<CMD>Telescope lsp_references<CR>',
-							keybindings = {'n', 'gr', opts}
+							keys = {'n', 'gr', opts}
 					},
 				})
 
@@ -162,7 +162,7 @@ return {
 			add_lsp('rust_analyzer', {})
 
 			-- OCaml LSP
-			add_lsp('ocamlls')
+			add_lsp('ocamllsp')
 
 			-- Java LSP, even!
 			add_lsp('jdtls', {
@@ -184,6 +184,9 @@ return {
 
 			-- Gleam has its own LSP
 			add_lsp('gleam')
+
+			-- Clojure
+			add_lsp('clojure_lsp')
 
 			-- Emmet for use with HTML
 			register_new_lsp('ls_emmet', {
@@ -222,10 +225,10 @@ return {
 		dependencies = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("trouble").setup { }
-			local command_center = require('command_center')
-			command_center.add({
+			local commander = require('commander')
+			commander.add({
 				{
-						description = '(LSP) Show errors',
+						desc = '(LSP) Show errors',
 						cmd = '<CMD>Trouble<CR>'
 				}
 			})
