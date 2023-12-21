@@ -26,7 +26,6 @@ return {
 					"gomod",
 					"haskell",
 					"hcl",
-					"help",
 					"html",
 					"java",
 					"javascript",
