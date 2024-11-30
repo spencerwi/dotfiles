@@ -49,6 +49,10 @@ return {
 					desc = 'Recent locations',
 					cmd = '<CMD>Telescope jumplist<CR>',
 					keys = {'n', 'gj', keymap_opts}
+				},
+				{
+					desc = 'Search help tags',
+					cmd = '<CMD>Telescope help_tags<CR>'
 				}
 			})
 		end

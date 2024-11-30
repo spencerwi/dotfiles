@@ -156,7 +156,7 @@ return {
 			add_lsp('intelephense', {})
 
 			-- Typescript/Javascript language server
-			add_lsp('tsserver', {})
+			add_lsp('ts_ls', {})
 
 			-- Rust LSP
 			add_lsp('rust_analyzer', {})
@@ -188,35 +188,11 @@ return {
 			-- Clojure
 			add_lsp('clojure_lsp')
 
+			-- Prolog
+			add_lsp('prolog_ls')
+
 			-- Emmet for use with HTML
-			register_new_lsp('ls_emmet', {
-				default_config = {
-					cmd = {'ls_emmet', '--stdio'},
-					filetypes = {
-						'html',
-						'css',
-						'scss',
-						'javascript',
-						'javascriptreact',
-						'typescript',
-						'typescriptreact',
-						'haml',
-						'xml',
-						'xsl',
-						'pug',
-						'slim',
-						'sass',
-						'sss',
-						'hbs',
-						'handlebars',
-					},
-					root_dir = function(fname)
-						return vim.loop.cwd()
-					end,
-					settings = {};
-				}
-			})
-			add_lsp('ls_emmet')
+			add_lsp('emmet_ls')
 		end
 	},
 
