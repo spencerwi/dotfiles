@@ -1,5 +1,46 @@
 return {
-	{
+	{ -- Compiler plugin, to make it easier to start debugging sessions from within nvim
+		"Zeioth/compiler.nvim",
+		cmd = {"CompilerOpen", "CompilerToggleResults", "CompilerRedo"},
+		dependencies = { "stevearc/overseer.nvim", "nvim-telescope/telescope.nvim" },
+		opts = {},
+		init = function()
+			local commander = require('commander')
+			commander.add({
+				{
+					desc = '(Compiler) Open Compiler pane',
+					cmd = '<CMD>CompilerOpen<CR>',
+					keys = {'n', '<leader>co', keymap_opts}
+				},
+				{
+					desc = '(Compiler) Toggle Compiler results',
+					cmd = '<CMD>CompilerToggleResults<CR>'
+				},
+				{
+					desc = '(Compiler) Redo last compilation',
+					cmd = '<CMD>CompilerRedo<CR>',
+				},
+				{
+					desc = '(Compiler) Stop compilation',
+					cmd = '<CMD>CompilerStop<CR>',
+				}
+			})
+		end
+	},
+	{ -- The task runner used by the compiler plugin
+		"stevearc/overseer.nvim",
+		commit = "6271cab7ccc4ca840faa93f54440ffae3a3918bd",
+		cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
+		opts = {
+			task_list = {
+				direction = "bottom",
+				min_height = 25,
+				max_height = 25,
+				default_detail = 1
+			},
+		},
+	},
+	{ -- Debug Anything Protocol adapter
 		'mfussenegger/nvim-dap',
 		dependencies = {'FeiyouG/commander.nvim'},
 		init = function() 
@@ -15,6 +56,18 @@ return {
 				type = 'executable',
 				command = '/home/spencerwi/.cargo/bin/rust-lldb',
 				name = 'rust_lldb'
+			}
+
+			
+			dap.adapters.coreclr = {
+				type = 'executable',
+				command = '/home/spencerwi/bin/netcoredbg',
+				args = {'--interpreter=vscode'}
+			}
+			dap.adapters.netcoredbg = {
+				type = 'executable',
+				command = '/home/spencerwi/bin/netcoredbg',
+				args = {'--interpreter=vscode'}
 			}
 
 			dap.configurations.cpp = {
@@ -40,6 +93,17 @@ return {
 					{}
 				}
 			}
+			dap.configurations.fsharp = {
+				{
+					type = "coreclr",
+					name = "launch - netcoredbg",
+					request = "launch",
+					program = function()
+						return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+					end,
+				},
+			}
+
 			-- dap.configurations.rust = dap.configurations.cpp
 
 			-- Nicer breakpoint marker
@@ -51,10 +115,7 @@ return {
 			commander.add({
 				{
 					desc = '(Debug) Run',
-					cmd = function() 
-						dap.continue()
-						dap.repl.open()
-					end,
+					cmd = dap.continue,
 					keys = {'n', '<leader>dr', keymap_opts}
 				},
 				{
@@ -102,4 +163,24 @@ return {
 			})
 		end
 	},
+	{ -- UI for debugging 
+		"rcarriga/nvim-dap-ui", 
+		dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+		init = function()
+			require('dapui').setup()
+			local dap, dapui = require("dap"), require("dapui")
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+		end
+	}
 }
