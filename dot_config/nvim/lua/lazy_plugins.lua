@@ -112,7 +112,7 @@ require('lazy').setup({
 	-- },
 
 	-- FSharp also needs its own plugin, for the same reason
-	'PhilT/vim-fsharp',
+	--'PhilT/vim-fsharp',
 
 	-- Kotlin also needs a plugin to add it as a filetype
 	'udalov/kotlin-vim',
