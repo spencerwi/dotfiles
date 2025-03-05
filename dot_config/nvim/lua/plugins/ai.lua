@@ -31,7 +31,7 @@ return {
 							url = 'https://openrouter.ai/api/v1/chat/completions',
 							env = {
 								url = 'https://openrouter.ai/api/v1/chat/completions',
-								api_key = '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'
+								api_key = 'cmd: cat /home/spencerwi/.config/.openrouter_key'
 							},
 							schema = {
 								model = {
