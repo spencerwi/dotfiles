@@ -8,7 +8,7 @@ return {
 				},
 				strategies = {
 					chat = {
-						adapter = 'openrouter_gemini',
+						adapter = 'openrouter',
 						tools = {
 							["mcp"] = {
 								callback = require("mcphub.extensions.codecompanion"),
@@ -21,25 +21,27 @@ return {
 						}
 					},
 					inline = {
-						adapter = 'openrouter_gemini'
+						adapter = 'openrouter'
 					}
 				},
 				adapters = {
-					openrouter_gemini = function() 
-						return require('codecompanion.adapters').extend('openai_compatible', {
-							name = 'openrouter_gemini',
-							url = 'https://openrouter.ai/api/v1/chat/completions',
-							env = {
+					http = { 
+						openrouter = function() 
+							return require('codecompanion.adapters').extend('openai_compatible', {
+								name = 'openrouter',
 								url = 'https://openrouter.ai/api/v1/chat/completions',
-								api_key = 'cmd: cat /home/spencerwi/.config/.openrouter_key'
-							},
-							schema = {
-								model = {
-									default = 'google/gemini-2.0-flash-exp:free'
+								env = {
+									url = 'https://openrouter.ai/api/v1/chat/completions',
+									api_key = 'cmd: cat /home/spencerwi/.config/.openrouter_key'
+								},
+								schema = {
+									model = {
+										default = 'qwen/qwen-2.5-coder-32b-instruct:free'
+									}
 								}
-							}
-						})
-					end
+							})
+						end
+					}
 				}
 			})
 			local commander = require('commander')

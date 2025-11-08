@@ -7,13 +7,12 @@ return {
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			--"Issafalcon/neotest-dotnet", -- Commented out until it gains F# testing support; using the fork for now
-			"Nsidorenco/neotest-dotnet"
+			"nsidorenco/neotest-vstest"
 		},
 		init = function() 
 			require('neotest').setup({
 				adapters = {
-					require('neotest-dotnet')
+					require("neotest-vstest")
 				}
 			})
 			local commander = require('commander')
